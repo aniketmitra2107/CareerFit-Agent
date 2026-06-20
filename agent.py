@@ -3,7 +3,7 @@ from google import genai
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 client = genai.Client()
 
 class Analysis(BaseModel):
