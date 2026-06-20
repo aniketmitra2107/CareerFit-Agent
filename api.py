@@ -1,9 +1,15 @@
 from fastapi import FastAPI, UploadFile, Form, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from agent import analyze, Analysis
 from resume_parser import extract_resume_text
 
 app = FastAPI(title="CareerFit")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["POST"],
+    allow_headers=["*"],
+)
 @app.post("/analyze", response_model=Analysis)
 async def analyze_endpoint(
         jd: str = Form(...),
