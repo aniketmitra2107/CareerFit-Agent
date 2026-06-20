@@ -1,12 +1,14 @@
+import os
 from fastapi import FastAPI, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from agent import analyze, Analysis
 from resume_parser import extract_resume_text
 
+origins = os.environ.get("FRONTEND_URLS", "http://locahost:3000").split(",")
 app = FastAPI(title="CareerFit")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=origins,
     allow_methods=["POST"],
     allow_headers=["*"],
 )
